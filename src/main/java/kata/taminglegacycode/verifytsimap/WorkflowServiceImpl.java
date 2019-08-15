@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WorkflowServiceImpl {
-    private static final String QRY_TSI_INF = "qry_tsi_inf";
+    protected static final String QRY_TSI_INF = "qry_tsi_inf";
     private List<String> wBasTypLst;
 
     public WorkflowServiceImpl(List wBasTypLst) {
@@ -12,10 +12,12 @@ public class WorkflowServiceImpl {
     }
 
     private Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam) throws FrameworkException {
-        return checkTsiInf(pTsiInfMap, pUsrOam, getPersistenceFactory().selectOne(QRY_TSI_INF, pTsiInfMap));
+        return checkTsiInf(pTsiInfMap, pUsrOam, getPersistenceFactory());
     }
 
-    protected Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam, Map<String, Object> wTsiMap) throws FrameworkException {
+    protected Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam, PersistenceFactory persistenceFactory) throws FrameworkException {
+
+        Map<String, Object> wTsiMap = persistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap);
 
         if (null == wTsiMap) {
             throw new FrameworkException("wTsiMap should not be null");

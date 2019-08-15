@@ -6,6 +6,10 @@ import org.junit.rules.ExpectedException;
 
 import java.util.*;
 
+import static kata.taminglegacycode.verifytsimap.WorkflowServiceImpl.QRY_TSI_INF;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+
 /**
  * Data for testing:
  * pTsiInfMap:
@@ -32,8 +36,10 @@ public class WorkflowServiceImplTest {
         Map<String, Object> pTsiInfMap = new HashMap<>();
         String pUsrOam = "";
         Map<String, Object> wTsiMap = null;
+        PersistenceFactory mockPersistenceFactory = mock(PersistenceFactory.class);
+        given(mockPersistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap)).willReturn(null);
 
-        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, mockPersistenceFactory);
     }
 
     @Test
@@ -48,8 +54,10 @@ public class WorkflowServiceImplTest {
         Map<String, Object> wTsiMap = new HashMap<String, Object>() {{
             put("xFliSts", null);
         }};
+        PersistenceFactory mockPersistenceFactory = mock(PersistenceFactory.class);
+        given(mockPersistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap)).willReturn(wTsiMap);
 
-        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, mockPersistenceFactory);
     }
 
     @Test
@@ -64,8 +72,10 @@ public class WorkflowServiceImplTest {
         Map<String, Object> wTsiMap = new HashMap<String, Object>() {{
             put("xFliSts", "02");
         }};
+        PersistenceFactory mockPersistenceFactory = mock(PersistenceFactory.class);
+        given(mockPersistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap)).willReturn(wTsiMap);
 
-        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, mockPersistenceFactory);
     }
 
     @Test
@@ -81,8 +91,10 @@ public class WorkflowServiceImplTest {
             put("xFliSts", "01");
             put("xTsiSts", "02");
         }};
+        PersistenceFactory mockPersistenceFactory = mock(PersistenceFactory.class);
+        given(mockPersistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap)).willReturn(wTsiMap);
 
-        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, mockPersistenceFactory);
     }
 
     @Test
@@ -99,8 +111,10 @@ public class WorkflowServiceImplTest {
             put("xTsiSts", "01");
             put("xTskCod", "03");
         }};
+        PersistenceFactory mockPersistenceFactory = mock(PersistenceFactory.class);
+        given(mockPersistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap)).willReturn(wTsiMap);
 
-        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, mockPersistenceFactory);
     }
 
     @Test
@@ -117,7 +131,9 @@ public class WorkflowServiceImplTest {
             put("xTskCod", "03");
             put("xOprUsr", "123456");
         }};
+        PersistenceFactory mockPersistenceFactory = mock(PersistenceFactory.class);
+        given(mockPersistenceFactory.selectOne(QRY_TSI_INF, pTsiInfMap)).willReturn(wTsiMap);
 
-        workflowServiceImpl.checkTsiInf(pTsiInfMap, "1234567", wTsiMap);
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, "1234567", mockPersistenceFactory);
     }
 }
