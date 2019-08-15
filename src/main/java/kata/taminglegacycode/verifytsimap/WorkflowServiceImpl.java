@@ -20,8 +20,11 @@ public class WorkflowServiceImpl {
      *
      */
     private Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam) throws FrameworkException {
+        return checkTsiInf(pTsiInfMap, pUsrOam, getPersistenceFactory().selectOne(QRY_TSI_INF, pTsiInfMap));
+    }
 
-        Map<String, Object> wTsiMap = getPersistenceFactory().selectOne(QRY_TSI_INF, pTsiInfMap);
+    private Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam, Map<String, Object> wTsiMap) throws FrameworkException {
+
         if (null == wTsiMap) {
             throw new FrameworkException("wTsiMap should not be null");
         }
