@@ -11,18 +11,6 @@ public class WorkflowServiceImpl {
         this.wBasTypLst = wBasTypLst;
     }
 
-    /**
-     * Data for testing:
-     * pTsiInfMap:
-     * ("xStrBbk","9341"),("xTsiTyp","UH023")
-     *
-     * wTsiMap:
-     * ("xFliSts","01"),("xTsiSts","01"),("xTskCod","03"),("xOprUsr","123456")
-     *
-     * wBasTypLst:
-     * ("01","02","03")
-     *
-     */
     private Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam) throws FrameworkException {
         return checkTsiInf(pTsiInfMap, pUsrOam, getPersistenceFactory().selectOne(QRY_TSI_INF, pTsiInfMap));
     }
