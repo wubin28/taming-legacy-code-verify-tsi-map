@@ -59,8 +59,24 @@ public class WorkflowServiceImplTest {
         workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
     }
 
+    @Test
+    public void xTsiSts_in_wTsiMap_should_be_01() throws FrameworkException {
+        thrown.expect(FrameworkException.class);
+        thrown.expectMessage("xTsiSts in wTsiMap should be 01");
+
+        List<String> wBasTypLst = new ArrayList<>();
+        WorkflowServiceImpl workflowServiceImpl = new WorkflowServiceImpl(wBasTypLst);
+        Map<String, Object> pTsiInfMap = new HashMap<>();
+        String pUsrOam = "";
+        Map<String, Object> wTsiMap = new HashMap<String, Object>() {{
+            put("xFliSts", "01");
+            put("xTsiSts", "02");
+        }};
+
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+    }
+
     //
-    //xTsiSts_in_wTsiMap_should_be_01
     //xTskCod_in_wTsiMap_should_be_in_wBasTypLst
     //xOprUsr_in_wTsiMap_should_be_equal_to_pUsrOam
 
