@@ -39,7 +39,7 @@ public class WorkflowServiceImpl {
         }
 
         if (wBasTypLst.contains((String) wTsiMap.get("xTskCod"))) {
-            throw new FrameworkException("**************");
+            throw new FrameworkException("xTskCod in wTsiMap should be in wBasTypLst");
         }
 
         if (!StringUtil.isEmpty((String) wTsiMap.get("xOprUsr")) && !pUsrOam.equals((String) wTsiMap.get("xOprUsr"))) {
