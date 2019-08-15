@@ -4,10 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WorkflowServiceImplTest {
     @Rule
@@ -76,8 +73,25 @@ public class WorkflowServiceImplTest {
         workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
     }
 
+    @Test
+    public void xTskCod_in_wTsiMap_should_be_in_wBasTypLst() throws FrameworkException {
+        thrown.expect(FrameworkException.class);
+        thrown.expectMessage("xTskCod in wTsiMap should not be in wBasTypLst");
+
+        List<String> wBasTypLst = Arrays.asList("type01");
+        WorkflowServiceImpl workflowServiceImpl = new WorkflowServiceImpl(wBasTypLst);
+        Map<String, Object> pTsiInfMap = new HashMap<>();
+        String pUsrOam = "";
+        Map<String, Object> wTsiMap = new HashMap<String, Object>() {{
+            put("xFliSts", "01");
+            put("xTsiSts", "01");
+            put("xTskCod", "type01");
+        }};
+
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+    }
+
     //
-    //xTskCod_in_wTsiMap_should_be_in_wBasTypLst
     //xOprUsr_in_wTsiMap_should_be_equal_to_pUsrOam
 
 }
