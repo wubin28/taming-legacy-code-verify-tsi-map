@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class WorkflowServiceImpl {
     private static final String QRY_TSI_INF = "qry_tsi_inf";
-    private List wBasTypLst;
+    private List<String> wBasTypLst;
 
     public WorkflowServiceImpl(List wBasTypLst) {
         this.wBasTypLst = wBasTypLst;
@@ -27,7 +27,7 @@ public class WorkflowServiceImpl {
         return checkTsiInf(pTsiInfMap, pUsrOam, getPersistenceFactory().selectOne(QRY_TSI_INF, pTsiInfMap));
     }
 
-    private Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam, Map<String, Object> wTsiMap) throws FrameworkException {
+    protected Map<String, Object> checkTsiInf(Map<String, Object> pTsiInfMap, String pUsrOam, Map<String, Object> wTsiMap) throws FrameworkException {
 
         if (null == wTsiMap) {
             throw new FrameworkException("wTsiMap should not be null");

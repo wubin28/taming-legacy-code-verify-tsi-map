@@ -1,7 +1,14 @@
 package kata.taminglegacycode.verifytsimap;
 
 public class FrameworkException extends Exception {
-    public FrameworkException(String wTsiMap_should_not_be_null) {
+    private final String message;
 
+    public FrameworkException(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 }
