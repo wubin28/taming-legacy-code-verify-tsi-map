@@ -7,6 +7,10 @@ public class WorkflowServiceImpl {
     private static final String QRY_TSI_INF = "qry_tsi_inf";
     private List wBasTypLst;
 
+    public WorkflowServiceImpl(List wBasTypLst) {
+        this.wBasTypLst = wBasTypLst;
+    }
+
     /**
      * Data for testing:
      * pTsiInfMap:
