@@ -25,7 +25,22 @@ public class WorkflowServiceImplTest {
         Map<String, Object> wTsiMap = null;
 
         workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
+    }
 
+    @Test
+    public void xFliSts_in_wTsiMap_should_not_be_null() throws FrameworkException {
+        thrown.expect(FrameworkException.class);
+        thrown.expectMessage("xFliSts in wTsiMap should not be null");
+
+        List<String> wBasTypLst = new ArrayList<>();
+        WorkflowServiceImpl workflowServiceImpl = new WorkflowServiceImpl(wBasTypLst);
+        Map<String, Object> pTsiInfMap = new HashMap<>();
+        String pUsrOam = "";
+        Map<String, Object> wTsiMap = new HashMap<String, Object>() {{
+            put("xFliSts", null);
+        }};
+
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
     }
 
     //xFliSts_in_wTsiMap_should_not_be_null
