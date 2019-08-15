@@ -74,7 +74,7 @@ public class WorkflowServiceImplTest {
     }
 
     @Test
-    public void xTskCod_in_wTsiMap_should_be_in_wBasTypLst() throws FrameworkException {
+    public void xTskCod_in_wTsiMap_should_not_be_in_wBasTypLst() throws FrameworkException {
         thrown.expect(FrameworkException.class);
         thrown.expectMessage("xTskCod in wTsiMap should not be in wBasTypLst");
 
@@ -91,7 +91,21 @@ public class WorkflowServiceImplTest {
         workflowServiceImpl.checkTsiInf(pTsiInfMap, pUsrOam, wTsiMap);
     }
 
-    //
-    //xOprUsr_in_wTsiMap_should_be_equal_to_pUsrOam
+    @Test
+    public void xOprUsr_in_wTsiMap_should_be_equal_to_pUsrOam() throws FrameworkException {
+        thrown.expect(FrameworkException.class);
+        thrown.expectMessage("xOprUsr in wTsiMap should be equal to pUsrOam");
 
+        List<String> wBasTypLst = Arrays.asList("type01");
+        WorkflowServiceImpl workflowServiceImpl = new WorkflowServiceImpl(wBasTypLst);
+        Map<String, Object> pTsiInfMap = new HashMap<>();
+        Map<String, Object> wTsiMap = new HashMap<String, Object>() {{
+            put("xFliSts", "01");
+            put("xTsiSts", "01");
+            put("xTskCod", "type02");
+            put("xOprUsr", "oam1");
+        }};
+
+        workflowServiceImpl.checkTsiInf(pTsiInfMap, "oam", wTsiMap);
+    }
 }
